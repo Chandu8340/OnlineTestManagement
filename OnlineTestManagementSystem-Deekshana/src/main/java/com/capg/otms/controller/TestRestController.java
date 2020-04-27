@@ -4,6 +4,9 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,7 +31,8 @@ public class TestRestController {
 	
 	TestServiceImpl testserviceimpl;
 	 //http://localhost:8090/test/create
-		// POSTMAN (Post : body{ "testTitle": "JAVA", " testDuration": "2 hours 30 mins","testTotalMarks":"100","testQuestion1":"What is final?","testQuestion2":"What is Inheritance?","testQuestion3":"What is Static?""testMarksScored":"70", "startTime":"3:30","endTime":"6:00"}
+		// POSTMAN (Post : body{ "testTitle": "JAVA", " testDuration": "2 hours 30 mins","testTotalMarks":"100","testQuestion1":"What is final?",
+	//"testQuestion2":"What is Inheritance?","testQuestion3":"What is Static?""testMarksScored":"70", "startTime":"3:30","endTime":"6:00"}
 		//dont insert id ,  id is  :@GeneratedValue(strategy = GenerationType.SEQUENCE)
 
 	@PostMapping("/create")    //postman :POST
@@ -37,17 +41,19 @@ public class TestRestController {
 	 * @author Deekshana : This createTest method will insert details into the entity 
 	 * 
 	 */
-	public String createTest(@RequestBody TestBean bean)
+	public ResponseEntity<Boolean>createTest(@RequestBody TestBean bean)
 	{
 		TestBean testbean=testserviceimpl.addTest(bean);
-		return testbean.getTestTitle() +  " has been added with test id " +  testbean.getTestId() + "\nTestQuestions:"+testbean.getTestQuestion1()+
-				"\nTestQuestions:"+testbean.getTestQuestion2()+ "\nTestQuestions:"+testbean.getTestQuestion3() +
-				"\nTestTotalMarks:"+testbean.getTestTotalMarks() + "\nTestMarksScored: "+ testbean.getTestMarksScored()
-				+"\nStartTime:"+ testbean.getStartTime()+"\n EndTime:"+testbean.getEndTime(); 
+		ResponseEntity<Boolean> responseEntity=new ResponseEntity(true, HttpStatus.OK);
+		System.out.println("response entity="+responseEntity);
+		return responseEntity;
+				
+				 // testbean.getTestTitle() +  " has been added with test id " +  testbean.getTestId() + "\nTestQuestions:"+testbean.getTestQuestion1()+
+				
+				// "\nTestQuestions:"+testbean.getTestQuestion2()+ "\nTestQuestions:"+testbean.getTestQuestion3() +
+				//"\nTestTotalMarks:"+testbean.getTestTotalMarks() + "\nTestMarksScored: "+ testbean.getTestMarksScored()
+				// +"\nStartTime:"+ testbean.getStartTime()+"\n EndTime:"+testbean.getEndTime(); 
 		
-		
-  
-	
 		}
 		/**
 		 * 
@@ -56,11 +62,12 @@ public class TestRestController {
 		 */
 
 	@DeleteMapping("/removeById/{testId}")      //postman :DELETE
-	public String deletetestById(@PathVariable int testId)
+	public 	ResponseEntity<Boolean> deletetestById(@PathVariable int testId)
 	{
 		testserviceimpl.removeTest(testId);
-		
-		return "your test is deleted successfully";
+		ResponseEntity<Boolean> responseEntity= new ResponseEntity(true, HttpStatus.OK);
+		System.out.println("response entity="+responseEntity);
+		return 	responseEntity;
 	}
 	
 	
@@ -70,10 +77,11 @@ public class TestRestController {
 	 */
 	
 	
-	@GetMapping("/findall")     //postman :GET
-	public List<TestBean> getalltests(){
+	@GetMapping("/findall") 
+	//postman :GET
+	public ResponseEntity< List<TestBean>> getalltests(){
 		List<TestBean> bean=testserviceimpl.getAllTests();
-		return bean;
+		return new ResponseEntity<List<TestBean>>(bean, new HttpHeaders(),HttpStatus.OK);
 	}
 	
   @ExceptionHandler(Exception.class)
