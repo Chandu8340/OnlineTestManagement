@@ -1,15 +1,10 @@
 package com.capg.otms.entity;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
 
 @Entity 
 @Table(name="Test_Spring")
@@ -19,16 +14,15 @@ public class TestBean {
 	
 	
 	private int testId;
-	private String testTitle; 
+    private String testTitle; 
 	private String testDuration; 
-	private String testQuestion;
-	private int testQuestions;
+	private String testQuestion1;
+	private String testQuestion2;
+	private String testQuestion3;
 	private double  testTotalMarks ;
 	private double testMarksScored ;
 	private String startTime ;
 	private String endTime ;
-	
-	
 	
 	public int getTestId() {
 		return testId;
@@ -48,18 +42,25 @@ public class TestBean {
 	public void setTestDuration(String testDuration) {
 		this.testDuration = testDuration;
 	}
-	public String getTestQuestion() {
-		return testQuestion;
+	public String getTestQuestion1() {
+		return testQuestion1;
 	}
-	public void setTestQuestion(String testQuestion) {
-		this.testQuestion = testQuestion;
+	public void setTestQuestion1(String testQuestion1) {
+		this.testQuestion1 = testQuestion1;
 	}
-	public int getTestQuestions() {
-		return testQuestions;
+	public String getTestQuestion2() {
+		return testQuestion2;
 	}
-	public void setTestQuestions(int testQuestions) {
-		this.testQuestions = testQuestions;
+	public void setTestQuestion2(String testQuestion2) {
+		this.testQuestion2 = testQuestion2;
 	}
+	public String getTestQuestion3() {
+		return testQuestion3;
+	}
+	public void setTestQuestion3(String testQuestion3) {
+		this.testQuestion3 = testQuestion3;
+	}
+	
 	public double getTestTotalMarks() {
 		return testTotalMarks;
 	}
@@ -84,14 +85,14 @@ public class TestBean {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
+
 	@Override
 	public String toString() {
 		return "TestBean [testId=" + testId + ", testTitle=" + testTitle + ", testDuration=" + testDuration
-				+ ", testQuestion=" + testQuestion + ", testQuestions=" + testQuestions + ", testTotalMarks="
-				+ testTotalMarks + ", testMarksScored=" + testMarksScored + ", startTime=" + startTime + ", endTime="
-				+ endTime + "]";
+				+ ", testQuestion1=" + testQuestion1 + ", testQuestion2=" + testQuestion2 + ", testQuestion3="
+				+ testQuestion3 + ",  testTotalMarks=" + testTotalMarks
+				+ ", testMarksScored=" + testMarksScored + ", startTime=" + startTime + ", endTime=" + endTime + "]";
 	}
-	
 
 }
 	

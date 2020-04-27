@@ -1,7 +1,4 @@
 package com.capg.otms.dao;
-
-
-
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,6 +15,11 @@ import com.capg.otms.entity.TestBean;
 public class TestDaoImpl implements ITestDao{
 	@PersistenceContext
 	EntityManager entitymanager;
+	
+	/**
+	 * @author deekshana: This addTest method will insert details into the entity of TestBean
+	 */
+	
 	@Override
 	public TestBean addTest(TestBean bean )
 	{
@@ -26,12 +28,23 @@ public class TestDaoImpl implements ITestDao{
 		 
 		 return bean;
 	}
+	
+	
+	/**
+	 * @author deekshana: This removeTest method will delete details of TestBean present in particular id 
+	 */
+	
 	@Override
 	public void removeTest (int testId )
 	{
 		TestBean testbean=entitymanager.find(TestBean.class,testId);
  entitymanager.remove(testbean);
 	}
+	
+	
+	/**
+	 * @author deekshana: This List method will retrive all the details tests
+	 */
 	@Override
 	public List<TestBean> getAllTests(){
 		TypedQuery<TestBean> query=entitymanager.createQuery("from TestBean",TestBean.class);
