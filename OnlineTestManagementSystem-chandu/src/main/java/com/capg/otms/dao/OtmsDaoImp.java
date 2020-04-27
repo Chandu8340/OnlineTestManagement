@@ -1,7 +1,10 @@
 package com.capg.otms.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -22,18 +25,28 @@ public class OtmsDaoImp implements IOtmsDao {
 		return userBean;
 	}
 	@Override
-	public UserBean updateUser(int userId) {
-	UserBean update=em.find(UserBean.class, userId);
-		em.merge(update);
-		return update;
+	public UserBean updateUser(UserBean userBean) {
+		em.merge(userBean);
+		return userBean;
 	}
 	@Override
 	public UserBean deleteUser(int userId) {
-		 UserBean delete= em.find(UserBean.class,userId);
-		em.remove(delete);
-			
-			return delete;
 		
+		
+		UserBean b=em.find(UserBean.class, userId);
+		
+		 em.remove(b);
+		return b;
+		 
+		
+	}
+	@Override
+	public List<UserBean> getAllUser() {
+		
+		TypedQuery<UserBean> query = em.createQuery("from UserBean", UserBean.class);
+		return query.getResultList();
+		
+	
 	}
 	
 	

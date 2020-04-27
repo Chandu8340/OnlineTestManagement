@@ -1,5 +1,7 @@
 package com.capg.otms.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,15 +20,21 @@ public class OtmsServiceImp implements IOtmsService {
 	}
 
 	@Override
-	public UserBean updateUser( int userId) {
-		return dao.updateUser(userId);
+	public UserBean updateUser( UserBean userBean) {
+		return dao.updateUser(userBean);
 	}
 
 	@Override
 	public UserBean deleteUser(int userId) {
 		
-		return dao.deleteUser(userId);
+		 return dao.deleteUser(userId);
 		
+	}
+
+	@Override
+	public List<UserBean> getAllUser() {
+		
+		return dao.getAllUser();
 	}
 
 	

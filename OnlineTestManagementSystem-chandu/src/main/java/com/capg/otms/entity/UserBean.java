@@ -10,7 +10,6 @@ import javax.persistence.Table;
 @Table(name="usertable")
 public class UserBean {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private  int userId;
 	private String userName;
 	private  String password;
