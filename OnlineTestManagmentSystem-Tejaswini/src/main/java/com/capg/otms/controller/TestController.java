@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,31 +18,32 @@ import com.capg.otms.service.TestServiceImpl;
 
 @RestController
 @RequestMapping (value="/test")
+@CrossOrigin("http://localhost:4200")
 public class TestController{
 	
 	@Autowired
-	TestServiceImpl testserviceimpl;
+	private TestServiceImpl testserviceimpl;
 
-	@PostMapping(path="/create")
-	public ResponseEntity<Boolean> CreateTest(@RequestBody TestBean test) {
-		testserviceimpl.CreateTest(test);
+	@PostMapping(path="/add")
+	public ResponseEntity<Boolean> AddTest(@RequestBody TestBean bean) {
+	 testserviceimpl.AddTest(bean);
 		ResponseEntity<Boolean> responseEntity = new ResponseEntity(true, HttpStatus.OK);
 		System.out.println("response entity=" + responseEntity);
 		return responseEntity;
 	}
 	@GetMapping(path="/getdetails/{testId}")
 	public ResponseEntity<TestBean> findTestById(@PathVariable("testId") int testId) {
-		TestBean test=testserviceimpl.findTestById(testId);
+		TestBean bean=testserviceimpl.findTestById(testId);
 		//if (test == null) {
             //throw new TestNotFoundException("test not found for id=" + testId);
         //}
-		return new ResponseEntity<TestBean>(test,new HttpHeaders(),HttpStatus.OK);
+		return new ResponseEntity<TestBean>(bean,new HttpHeaders(),HttpStatus.OK);
 	}
 
-	@PutMapping("/update/{test}")
+	@PutMapping("/update")
 	
-		public ResponseEntity<TestBean> updateTest(@RequestBody TestBean test){
-			test=testserviceimpl.updateTest(test);
-			return new ResponseEntity<TestBean>(test,new HttpHeaders(),HttpStatus.OK);
+		public ResponseEntity<TestBean> updateTest(@RequestBody TestBean bean){
+			 bean=testserviceimpl.updateTest(bean);
+			return new ResponseEntity<TestBean>(bean,new HttpHeaders(),HttpStatus.OK);
 		}
 }

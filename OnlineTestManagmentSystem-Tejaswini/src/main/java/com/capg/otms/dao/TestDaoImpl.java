@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.capg.otms.entity.TestBean;
-import com.capg.otms.entity.questions;
+
 
 @Repository
 @Transactional
@@ -18,8 +18,8 @@ public class TestDaoImpl implements ITestDao {
 	EntityManager entitymanager;
 	
 	@Override
-	public TestBean CreateTest(TestBean test) {
-	   return entitymanager.merge(test);
+	public TestBean AddTest(TestBean bean) {
+	   return entitymanager.merge(bean);
 
 	}
 	
@@ -30,20 +30,16 @@ public class TestDaoImpl implements ITestDao {
 	}
 
 	@Override
-	public TestBean updateTest(TestBean test) {
-		TestBean tst=findTestById(test.getTestId());
-		tst.setTestTitle(test.getTestTitle());
+	public TestBean updateTest(TestBean bean) {
+		TestBean test=findTestById(bean.getTestId());
+		test.setTestTitle(bean.getTestTitle());
 		//emp.setEmpSal(test.getEmpSal());
-		tst=entitymanager.merge(tst);
-		return tst;
+		test=entitymanager.merge(test);
+		return test;
 	   // return entitymanager.merge(test);
 	}
 	
-	@Override
-	public Set<questions> assignTest(int userId, int testId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 
