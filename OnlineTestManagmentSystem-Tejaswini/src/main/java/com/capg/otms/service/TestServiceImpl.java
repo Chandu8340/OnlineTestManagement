@@ -15,20 +15,30 @@ import com.capg.otms.entity.questions;
 public class TestServiceImpl implements ITestService {
 @Autowired
 ITestDao dao;
-	@Override
-	public TestBean updateTest(TestBean test, String testTitle) {
-		// TODO Auto-generated method stub
-		return dao.updateTest(test,testTitle);
-	}
-	@Override
-	public Set<questions> assignTest(int userId, int testId) {
-		// TODO Auto-generated method stub
-		return dao.assignTest(userId, testId);
-	}
-	
-
-
-	
-
-	
+public TestBean findTestById(int testId) {
+	return dao.findTestById(testId);
 }
+
+@Override
+public TestBean updateTest(TestBean test) {
+			return dao.updateTest(test);
+}
+@Override
+public Set<questions> assignTest(int userId, int testId) {
+	return dao.assignTest(userId, testId);
+}
+
+
+@Override
+public TestBean CreateTest(TestBean test) {
+	// TODO Auto-generated method stub
+	return dao.CreateTest(test);
+}
+	}
+	
+
+
+	
+
+	
+
