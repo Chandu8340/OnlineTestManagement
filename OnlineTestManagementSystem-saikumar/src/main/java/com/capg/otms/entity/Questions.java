@@ -3,12 +3,15 @@ package com.capg.otms.entity;
 import java.util.Arrays;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
 @Table(name="All_Questions")
 public class Questions {
 	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int questionId;
 	
 	private String questionTitle;

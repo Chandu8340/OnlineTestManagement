@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 public class Questions {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int questionId;
 	private String questionTitle;
 	private String[] questionOption;
