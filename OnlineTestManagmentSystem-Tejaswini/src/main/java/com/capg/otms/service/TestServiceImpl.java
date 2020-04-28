@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.capg.otms.dao.ITestDao;
 import com.capg.otms.entity.TestBean;
-import com.capg.otms.entity.questions;
+
 
 
 
@@ -15,20 +15,28 @@ import com.capg.otms.entity.questions;
 public class TestServiceImpl implements ITestService {
 @Autowired
 ITestDao dao;
-	@Override
-	public TestBean updateTest(TestBean test, String testTitle) {
-		// TODO Auto-generated method stub
-		return dao.updateTest(test,testTitle);
-	}
-	@Override
-	public Set<questions> assignTest(int userId, int testId) {
-		// TODO Auto-generated method stub
-		return dao.assignTest(userId, testId);
-	}
-	
-
-
-	
-
-	
+@Override
+public TestBean AddTest(TestBean bean) {
+	// TODO Auto-generated method stub
+	return dao.AddTest(bean);
 }
+@Override
+public TestBean findTestById(int testId) {
+	return dao.findTestById(testId);
+}
+
+@Override
+public TestBean updateTest(TestBean bean) {
+			return dao.updateTest(bean);
+}
+
+
+
+	}
+	
+
+
+	
+
+
+

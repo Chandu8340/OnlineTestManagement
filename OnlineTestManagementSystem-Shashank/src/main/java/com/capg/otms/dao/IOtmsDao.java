@@ -5,7 +5,7 @@ import com.capg.otms.entity.Test;
 
 
 public interface IOtmsDao {
-	public Questions updateQuestions(Questions question,int TestId);
+	public Questions update(Questions question);
 	public Questions getResult(Test test);
 
 }

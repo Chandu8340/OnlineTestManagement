@@ -8,6 +8,7 @@ public class OnlineTestManagmentSystemTejaswiniApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineTestManagmentSystemTejaswiniApplication.class, args);
+		System.out.println("spring boot application started");
 	}
 
 }
