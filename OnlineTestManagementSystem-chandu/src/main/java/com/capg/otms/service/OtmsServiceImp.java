@@ -16,7 +16,7 @@ public class OtmsServiceImp implements IOtmsService {
 	@Override
 	public UserBean addUser(UserBean userBean) {
 		
-		return dao.registerUser(userBean);
+		return dao.addUser(userBean);
 	}
 
 	@Override
@@ -25,9 +25,9 @@ public class OtmsServiceImp implements IOtmsService {
 	}
 
 	@Override
-	public UserBean deleteUser(int userId) {
+	public void deleteUser(long userId) {
 		
-		 return dao.deleteUser(userId);
+		 dao.deleteUser(userId);
 		
 	}
 
@@ -38,7 +38,10 @@ public class OtmsServiceImp implements IOtmsService {
 	}
 
 	
+	}
 
 	
 
-}
+	
+
+
