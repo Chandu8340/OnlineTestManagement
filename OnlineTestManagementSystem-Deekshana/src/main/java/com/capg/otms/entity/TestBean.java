@@ -4,6 +4,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+
 
 
 @Entity 
@@ -14,15 +16,23 @@ public class TestBean {
 	
 	
 	private int testId;
-    private String testTitle; 
-	private String testDuration; 
+	
+	@NotEmpty(message="Title should not be null and It accepts String")
+    private String testTitle;
+	@NotEmpty(message="Test Duration should not be null and It accepts String")
+    private String testDuration;
+	@NotEmpty(message="Test Question1 should not be null and It accepts String")
 	private String testQuestion1;
-	private String testQuestion2;
-	private String testQuestion3;
-	private double  testTotalMarks ;
+	@NotEmpty(message="Test Question2 should not be null and It accepts String")
+    private String testQuestion2;
+	@NotEmpty(message="Test Question3 should not be null and It accepts String")
+    private String testQuestion3;
+    private double testTotalMarks ;
 	private double testMarksScored ;
+	@NotEmpty(message="Start Time should not be null and It accepts String")
 	private String startTime ;
-	private String endTime ;
+	@NotEmpty(message="End time should not be null and It accepts String")
+    private String endTime ;
 	
 	public int getTestId() {
 		return testId;
