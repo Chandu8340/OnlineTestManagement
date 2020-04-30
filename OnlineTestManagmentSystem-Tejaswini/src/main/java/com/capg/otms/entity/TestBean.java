@@ -1,30 +1,33 @@
 package com.capg.otms.entity;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Set;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Table(name="Test")
+@Table(name="test1")
 public class TestBean {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue
     private int testId;
 	private String testTitle;
-	private int userId;
+	@DateTimeFormat(pattern="hh:mm:ss")
+	private LocalTime testDuration;
 	
-		
+	@DateTimeFormat(pattern="yyyy/MM/ddThh:mm:ss")
+	private LocalDateTime startTime;
+	@DateTimeFormat(pattern="yyyy/MM/ddThh:mm:ss")
+	private LocalDateTime endTime;
 	public TestBean() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public TestBean(int testId, String testTitle,int userId) {
-		super();
-		this.testId = testId;
-		this.testTitle = testTitle;
-		this.userId = userId;
+		
 	}
 	public int getTestId() {
 		return testId;
@@ -38,16 +41,38 @@ public class TestBean {
 	public void setTestTitle(String testTitle) {
 		this.testTitle = testTitle;
 	}
-	public int getUserId() {
-		return userId;
+	public LocalTime getTestDuration() {
+		return testDuration;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;}
+	public void setTestDuration(LocalTime testDuration) {
+		this.testDuration = testDuration;
+	}
+		public LocalDateTime getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+	public TestBean(int testId, String testTitle, LocalTime testDuration, LocalDateTime startTime, LocalDateTime endTime) {
+		super();
+		this.testId = testId;
+		this.testTitle = testTitle;
+		this.testDuration = testDuration;
+		
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
 	@Override
 	public String toString() {
-		return "TestBean [testId=" + testId + ", testTitle=" + testTitle + ", userId=" + userId + "]";
+		return "Test [testId=" + testId + ", testTitle=" + testTitle + ", testDuration=" + testDuration
+				+ ", startTime=" + startTime + ", endTime="
+				+ endTime + "]";
 	}
-
-	
-    
+		
 }
