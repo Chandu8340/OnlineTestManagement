@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.otms.entity.Questions;
 import com.capg.otms.service.OtmsServiceImp;
+import com.sun.org.apache.xml.internal.serialize.Method;
 @RestController
 @RequestMapping("/Questions")
 @CrossOrigin("http://localhost:4200")
@@ -34,7 +36,7 @@ public class QuestionsController {
 	 * @author saikumar: this create question will add a question in to the database
 	 * 
 	 */
-@PostMapping("/create")
+	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	public Questions createQuestion(@RequestBody Questions question)
 	{
 		service.addQuestion(question);
@@ -51,7 +53,7 @@ public class QuestionsController {
 
 
 @DeleteMapping("/remove/{questionId}")
-	public void removeQuestion(@PathVariable int questionId)
+	public void removeQuestion(@PathVariable("questionId")int questionId)
 	{
 	
 			 service.deleteQuestion(questionId);
