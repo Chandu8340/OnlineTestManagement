@@ -9,6 +9,6 @@ public interface IOtmsDao {
 	public Questions addQuestion(Questions question);
 	public void deleteQuestion(int questionId);
 	List<Questions>getAllQuestions();
-	
+	public Questions findById(int questionId);
 	
 }
