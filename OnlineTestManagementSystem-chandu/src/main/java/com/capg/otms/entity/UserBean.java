@@ -10,42 +10,61 @@ import javax.persistence.Table;
 @Table(name="usertable")
 public class UserBean {
 	@Id
-	private  int userId;
-	private String userName;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	private  long userId;
+	private String name;
 	private  String password;
-	private double phonenumber;
+	private long phonenumber;
 	
-	public int getUserId() {
+	public UserBean() {
+		
+	}
+
+	public UserBean(long userId, String name, String password, long phonenumber) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.password = password;
+		this.phonenumber = phonenumber;
+	}
+
+	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public String getUsername() {
-		return userName;
+
+	public String getName() {
+		return name;
 	}
-	public void setUsername(String username) {
-		this.userName = username;
+
+	public void setName(String name) {
+		this.name = name;
 	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 	public double getPhonenumber() {
 		return phonenumber;
 	}
-	public void setPhonenumber(double phonenumber) {
+
+	public void setPhonenumber(long phonenumber) {
 		this.phonenumber = phonenumber;
 	}
+
 	@Override
 	public String toString() {
-		return "UserBean [userId=" + userId + ", username=" + userName + ", password=" + password + ", phonenumber="
+		return "UserBean [userId=" + userId + ", name=" + name + ", password=" + password + ", phonenumber="
 				+ phonenumber + "]";
 	}
-	
-	
-	
+
 
 }

@@ -11,14 +11,17 @@ import javax.persistence.Table;
 
 public class Questions {
 	@Id
-	//@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private int questionId;
 	private String questionTitle;
 	private String[] questionOption;
 	private int questionAnswer;
 	private int questionMarks;
-	private int chosenAnswer;
-	private int marksScored;
+
+	/*
+	 * private int chosenAnswer; private int marksScored;
+	 * 
+	 */
 	public int getQuestionId() {
 		return questionId;
 	}
@@ -49,18 +52,11 @@ public class Questions {
 	public void setQuestionMarks(int questionMarks) {
 		this.questionMarks = questionMarks;
 	}
-	public int getChosenAnswer() {
-		return chosenAnswer;
-	}
-	public void setChosenAnswer(int chosenAnswer) {
-		this.chosenAnswer = chosenAnswer;
-	}
-	public int getMarksScored() {
-		return marksScored;
-	}
-	public void setMarksScored(int marksScored) {
-		this.marksScored = marksScored;
-	}
-
+	/*
+	 * public int getChosenAnswer() { return chosenAnswer; } public void
+	 * setChosenAnswer(int chosenAnswer) { this.chosenAnswer = chosenAnswer; }
+	 * public int getMarksScored() { return marksScored; } public void
+	 * setMarksScored(int marksScored) { this.marksScored = marksScored; }
+	 */
 
 }

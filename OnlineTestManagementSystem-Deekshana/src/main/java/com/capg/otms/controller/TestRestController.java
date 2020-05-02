@@ -3,6 +3,8 @@ import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,7 +43,7 @@ public class TestRestController {
 	 * @author Deekshana : This createTest method will insert details into the entity 
 	 * 
 	 */
-	public ResponseEntity<Boolean>createTest(@RequestBody TestBean bean)
+	public ResponseEntity<Boolean>createTest(@Valid @RequestBody TestBean bean)
 	{
 		TestBean testbean=testserviceimpl.addTest(bean);
 		ResponseEntity<Boolean> responseEntity=new ResponseEntity(true, HttpStatus.OK);
