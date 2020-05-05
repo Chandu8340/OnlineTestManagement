@@ -1,13 +1,20 @@
 package com.capg.otms.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import com.capg.otms.entity.TestBean;
 
 
 public interface ITestDao {
-	public TestBean AddTest(TestBean bean);
-	 public TestBean updateTest(TestBean bean);
-	 public TestBean findTestById(int testId);
+	TestBean createTest(TestBean bean);
 	
-	}
+	TestBean updateTest(TestBean bean);
+	
+	TestBean findTestById(int testId);
+	
+	List<TestBean> findAllTests();
+
+	boolean assignTest(long testId);
+	
+}

@@ -1,6 +1,7 @@
 package com.capg.otms.service;
 import java.util.List;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +17,25 @@ public  class OtmsServiceImp implements IOtmsService {
 	}
 
 	@Override
-	public Questions getResult(Test test) {
+	public int getResult(Questions question) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.getResult(question);
+		
+	}
+	
+
+
+	@Override
+	public List<Questions> getAllQuestions() {
+		// TODO Auto-generated method stub
+		return dao.getAllQuestions();
 	}
 
+	@Override
+	public Questions addQuestions(Questions question) {
+		// TODO Auto-generated method stub
+		return dao.addQuestions(question);	}
+	
 }
+
+
