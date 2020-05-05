@@ -11,7 +11,7 @@ public interface IOtmsService {
      
     public UserBean updateUser(UserBean userBean);
      
-    public UserBean deleteUser (int userId);
+    public void deleteUser (long userId);
     
     public List<UserBean> getAllUser();
   

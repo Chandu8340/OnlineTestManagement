@@ -3,6 +3,9 @@ package com.capg.otms.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,42 +18,54 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.otms.entity.UserBean;
 import com.capg.otms.service.OtmsServiceImp;
+
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping(value="/test")
 public class OtmsRestController {
-	
+
 	@Autowired
 	OtmsServiceImp service;
+
+	
+	
+	// This addUsers method is used to add users into database 
 	
 	@PostMapping(path="/add")
-	public String addUsers(@RequestBody UserBean userBean) {	
-	UserBean add=service.addUser(userBean);
-		return "hello";
+	public UserBean addUsers(@RequestBody UserBean userBean) {
+		service.addUser(userBean);
+		return userBean ;
 	}
+
 	
-	@PutMapping(path="/update")
+	//This updateUsers is used to update the details of Users  
+	
+	@PutMapping(path= "/update")
 	public String updateUsers(@RequestBody UserBean userBean) {
-		
-		UserBean update=service.updateUser(userBean);
-		return "updated";
-		
+		UserBean update = service.updateUser(userBean);
+		return update.getName() + " is updated successfully";
+
 	}
-	@DeleteMapping(path="/delete/{userId}")
-	public String deleteUsers(@PathVariable int userId)
-	{
-		service.deleteUser(userId);
-		
-		return "deleted";
-		
-	}
+
+	//This deleteUsers method is used to delete users in database
 	
-	@GetMapping("/getall")
+	@DeleteMapping(path="/delete/{userId}")
+	public String deleteUsers(@PathVariable long userId) {
+
+		 service.deleteUser(userId);
+
+		return  "deleted";
+
+	}
+
+	//This method is used to show all the Users 
+	
+	@GetMapping(path="/getall")
 	public List<UserBean> getAllUsers() {
-		
-		List<UserBean> list=service.getAllUser();
+
+		List<UserBean> list = service.getAllUser();
+
 		return list;
-		
 	}
 
 }

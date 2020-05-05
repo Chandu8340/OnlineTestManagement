@@ -2,14 +2,19 @@ package com.capg.otms.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,11 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.otms.entity.Questions;
 import com.capg.otms.service.OtmsServiceImp;
-import com.sun.org.apache.xml.internal.serialize.Method;
 @RestController
 @RequestMapping("/Questions")
 @CrossOrigin("http://localhost:4200")
 public class QuestionsController {
+
 	@Autowired
 	OtmsServiceImp service;
 	 //http://localhost:8082/test/create
@@ -30,19 +35,24 @@ public class QuestionsController {
 
 	
 	
-	
 	/**
 	 * 
 	 * @author saikumar: this create question will add a question in to the database
 	 * 
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
+	
 	public Questions createQuestion(@RequestBody Questions question)
 	{
-		service.addQuestion(question);
-		
-		return question;
-		
+
+		Questions questions = service.addQuestion(question);
+		return questions;
+		/*
+		 * ResponseEntity<Questions>
+		 * if(q!=null) { return new ResponseEntity(q, HttpStatus.OK); } return new
+		 * ResponseEntity(q, HttpStatus.NOT_FOUND);
+		 */
+
 	}
 
 
@@ -56,7 +66,27 @@ public class QuestionsController {
 	public void removeQuestion(@PathVariable("questionId")int questionId)
 	{
 	
-			 service.deleteQuestion(questionId);
+	//ResponseEntity<Boolean>
+		
+		 
+		/*
+		 * if(service.findById(questionId)!=null) {
+		 * 
+		 * ResponseEntity<Boolean> responseEntity= new ResponseEntity(true,
+		 * HttpStatus.OK); 
+		 * 
+		 * 
+		 * } ResponseEntity<Boolean> responseEntity= new ResponseEntity(false,
+		 * HttpStatus.BAD_REQUEST);
+		 */
+		 // System.out.println("response entity="+responseEntity); 
+	System.out.println(questionId);
+		  service.deleteQuestion(questionId);
+		 // return "deleted";
+		  
+		 
+			 
+				
 	}
 	
 /**
@@ -67,10 +97,10 @@ public class QuestionsController {
 
 
 @GetMapping("/findAll")
-public List<Questions> getAllQuestions()
+public ResponseEntity<List<Questions>> getAllQuestions()
 {
 	List<Questions> queries=service.getAllQuestions();
-	return queries;
+	return new ResponseEntity<List<Questions>>(queries, new HttpHeaders(),HttpStatus.OK);
 }
 
 }

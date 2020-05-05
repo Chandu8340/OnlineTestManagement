@@ -1,5 +1,6 @@
 package com.capg.otms.service;
 
+import java.util.List;
 import java.util.Set;
 
 
@@ -9,8 +10,15 @@ import com.capg.otms.entity.TestBean;
 
 
 public interface ITestService {
-	public TestBean AddTest(TestBean bean);
-	public TestBean findTestById(int testId);
-	public TestBean updateTest(TestBean bean);
+	
+	 TestBean createTest(TestBean bean);
+	
+	 TestBean findTestById(int testId);
+	 
+	 TestBean updateTest(TestBean bean);
+	 
+	 List<TestBean> findAllTests();
+	 
+	 boolean assignTest(long testId);
 	 
 }
