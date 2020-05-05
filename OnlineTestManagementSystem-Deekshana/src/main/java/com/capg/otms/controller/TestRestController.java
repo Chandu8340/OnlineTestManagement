@@ -29,7 +29,7 @@ import com.capg.otms.service.TestServiceImpl;
 public class TestRestController {
 	@Autowired 
 	
-	// autowire attribute reduces configuration. 
+	// autowire attribute reduces configuration.
 	
 	TestServiceImpl testserviceimpl;
 	 //http://localhost:8090/test/create
@@ -64,12 +64,17 @@ public class TestRestController {
 		 */
 
 	@DeleteMapping("/removeById/{testId}")      //postman :DELETE
-	public 	ResponseEntity<Boolean> deletetestById(@PathVariable int testId)
-	{
+	public 	ResponseEntity<String> deletetestById(@PathVariable int testId)
+	{try {
 		testserviceimpl.removeTest(testId);
-		ResponseEntity<Boolean> responseEntity= new ResponseEntity(true, HttpStatus.OK);
-		System.out.println("response entity="+responseEntity);
-		return 	responseEntity;
+		ResponseEntity<String> responseEntity= new ResponseEntity(true, HttpStatus.OK);
+	  System.out.println("response entity="+responseEntity);
+	return 	responseEntity;
+	}
+	catch(Exception e) {
+	
+		return new ResponseEntity <String>("Id does not exists",HttpStatus.BAD_REQUEST);
+	}
 	}
 	
 	
