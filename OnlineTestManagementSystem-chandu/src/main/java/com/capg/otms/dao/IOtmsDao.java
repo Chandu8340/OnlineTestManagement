@@ -13,5 +13,10 @@ public interface IOtmsDao {
 	    public void deleteUser (long userId);
 	    
 	    public List<UserBean> getAllUser();
+	    
+	    public UserBean findById(long userId);
+	    
+	    
+	    
 	
 }
