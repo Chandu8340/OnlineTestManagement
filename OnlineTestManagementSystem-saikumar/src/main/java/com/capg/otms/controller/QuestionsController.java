@@ -2,11 +2,10 @@ package com.capg.otms.controller;
 
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,13 +21,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.otms.entity.Questions;
 import com.capg.otms.service.OtmsServiceImp;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 @RestController
-@RequestMapping("/Questions")
+//@RequestMapping("/Questions")
 @CrossOrigin("http://localhost:4200")
+@Api(value="Online Test Management")
+@RequestMapping("/api")
+
 public class QuestionsController {
+	
+	Logger log=LoggerFactory.getLogger(QuestionsController.class);
 
 	@Autowired
 	OtmsServiceImp service;
+	
+
+	/* @Autowired RestTemplate resttemplate; */
+	
 	 //http://localhost:8082/test/create
 	// POSTMAN (Post : body{ "QuestionTtitle": "JAVA", "QuestionOption": "["0","1","2","3"]", "QuestionAnswer": "1", "chosenAnswer": "2",QuestionMarks":"5", "MarksScored":"70",}
 	//dont insert id ,  id is  :@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -42,19 +57,27 @@ public class QuestionsController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
 	
-	public Questions createQuestion(@RequestBody Questions question)
+	public Questions createQuestion(@ApiParam(value="Questions  in JSON Format")@RequestBody Questions question)
 	{
-
 		Questions questions = service.addQuestion(question);
+
 		return questions;
-		/*
-		 * ResponseEntity<Questions>
-		 * if(q!=null) { return new ResponseEntity(q, HttpStatus.OK); } return new
-		 * ResponseEntity(q, HttpStatus.NOT_FOUND);
-		 */
+		
 
 	}
-
+	
+	@ApiResponses(value= {
+			@ApiResponse(code = 200, message = "Successfull"),
+		    @ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+		    @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+		    @ApiResponse(code = 404, message = "The resource you were trying to reach is not found")
+	})
+	
+	
+	
+	
+	
+	
 
 /**
  * 
@@ -62,9 +85,24 @@ public class QuestionsController {
  */
 
 
-@DeleteMapping("/remove/{questionId}")
-	public void removeQuestion(@PathVariable("questionId")int questionId)
+@DeleteMapping("/{questionId}")
+@ApiOperation(value = "Delete a question")
+	public Boolean removeQuestion(@PathVariable("questionId")int questionId)
 	{
+		service.deleteQuestion(questionId);
+		int p=service.hereWeAre();
+		
+		if(p==400)
+		{
+
+			System.out.println("in side else");
+			return false;
+		}
+		else 
+		{
+			
+			return true;
+		}
 	
 	//ResponseEntity<Boolean>
 		
@@ -80,10 +118,11 @@ public class QuestionsController {
 		 * HttpStatus.BAD_REQUEST);
 		 */
 		 // System.out.println("response entity="+responseEntity); 
-	System.out.println(questionId);
-		  service.deleteQuestion(questionId);
-		 // return "deleted";
-		  
+	//OtmsServiceImp serv = new OtmsServiceImp();
+	//System.out.println("controller "+questionId);
+	
+	
+		 
 		 
 			 
 				
@@ -95,12 +134,18 @@ public class QuestionsController {
 	
 
 
-
+@HystrixCommand(fallbackMethod="whengetnotworks")
 @GetMapping("/findAll")
 public ResponseEntity<List<Questions>> getAllQuestions()
+
 {
 	List<Questions> queries=service.getAllQuestions();
+
 	return new ResponseEntity<List<Questions>>(queries, new HttpHeaders(),HttpStatus.OK);
+}
+public ResponseEntity<List<Questions>> whengetnotworks()
+{
+	return null;
 }
 
 }
