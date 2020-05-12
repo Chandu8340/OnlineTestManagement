@@ -14,17 +14,25 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capg.otms.entity.Questions;
 import com.capg.otms.service.IOtmsService;
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")//connection to UI layer
 @RestController
 @RequestMapping("/Questions")
 public class QuestionController {
 	@Autowired
 	IOtmsService service;
+	
+	
 	@PutMapping("/update")
 	public Questions updateQuestions(@RequestBody Questions question) {
 	
 				service.update(question);
 				return question;
+				
+				/**
+				 * 
+				 * @author shashank: this update method will update a question in to the database
+				 * 
+				 */
 	}
 	@GetMapping("/Questions/result")
 	public int getResult(@PathVariable Questions question ) {
@@ -37,6 +45,12 @@ public class QuestionController {
 	{
 		service.addQuestions(question);
 		return question;
+		
+		/**
+		 * 
+		 * @author shashank: this create question will add a question in to the database
+		 * 
+		 */
 	}
 	@GetMapping("/findAll")
 	public List<Questions>getAllQuestions()
@@ -44,8 +58,10 @@ public class QuestionController {
 		List<Questions>queries=service.getAllQuestions();
 		return queries;
 		
+		/**
+		 * 
+		 * @author shashank: this findAll method will view all the question added to the database
+		 * 
+		 */
 	}
-	
-	
-
 }
