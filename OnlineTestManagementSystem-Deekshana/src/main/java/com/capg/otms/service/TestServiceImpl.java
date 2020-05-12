@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.capg.otms.dao.ITestDao;
 import com.capg.otms.entity.TestBean;
+import com.capg.otms.exceptions.TestException;
 
 @Service
 public class TestServiceImpl implements ITestService {
@@ -27,7 +28,9 @@ return dao.addTest(Bean);
  */
 @Override
 public void removeTest(int testId) {
+	
 dao.removeTest(testId);
+
 }
 
 
@@ -38,4 +41,5 @@ dao.removeTest(testId);
 @Override
 public List<TestBean>getAllTests() {
 	return dao.getAllTests();
-}}
+}
+}

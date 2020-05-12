@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,7 +57,7 @@ OtmsServiceImp service;
 	
 		 entityManager.remove(question);
 	
-
+  
 	}
 	
 	/**
@@ -69,7 +70,14 @@ OtmsServiceImp service;
 TypedQuery<Questions> query=entityManager.createQuery("from Questions",Questions.class);
 		return query.getResultList();
 	}
-
+	
+	@Override
+public Questions findById(int questionId)
+{
+		Questions question=entityManager.find(Questions.class,questionId);
+		
+			return question;
+}
 	
 
 

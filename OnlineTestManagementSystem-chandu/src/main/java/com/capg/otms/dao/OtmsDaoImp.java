@@ -21,7 +21,7 @@ public class OtmsDaoImp implements IOtmsDao {
 	@Override
 	public UserBean addUser(UserBean userBean) {
 		em.persist(userBean);
-		;
+
 		return userBean;
 	}
 
@@ -49,4 +49,13 @@ public class OtmsDaoImp implements IOtmsDao {
 
 	}
 
-}
+	@Override
+	public UserBean findById(long userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	}
+
+	
+

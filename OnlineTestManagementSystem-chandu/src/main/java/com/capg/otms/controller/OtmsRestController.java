@@ -2,10 +2,9 @@ package com.capg.otms.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +31,7 @@ public class OtmsRestController {
 	// This addUsers method is used to add users into database 
 	
 	@PostMapping(path="/add")
-	public UserBean addUsers(@RequestBody UserBean userBean) {
+	public UserBean addUsers( @RequestBody UserBean userBean) {
 		service.addUser(userBean);
 		return userBean ;
 	}
@@ -41,9 +40,9 @@ public class OtmsRestController {
 	//This updateUsers is used to update the details of Users  
 	
 	@PutMapping(path= "/update")
-	public String updateUsers(@RequestBody UserBean userBean) {
-		UserBean update = service.updateUser(userBean);
-		return update.getName() + " is updated successfully";
+	public UserBean updateUsers( @RequestBody UserBean userBean) {
+		service.updateUser(userBean);
+		return  userBean;
 
 	}
 
@@ -67,5 +66,8 @@ public class OtmsRestController {
 
 		return list;
 	}
+	
+	
+	
 
 }

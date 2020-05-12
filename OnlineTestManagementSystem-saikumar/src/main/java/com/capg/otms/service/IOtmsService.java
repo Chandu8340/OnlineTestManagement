@@ -12,5 +12,5 @@ public interface IOtmsService {
 	public void deleteQuestion(int questionId);
 	List<Questions>getAllQuestions();
 	
-	
+	public Questions findById(int questionId);
 }

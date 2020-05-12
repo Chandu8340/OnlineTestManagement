@@ -5,6 +5,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 
 
 
@@ -14,12 +17,14 @@ public class TestBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	
-	
+	@NotNull(message="Give the existed Id")
 	private int testId;
 	
 	@NotEmpty(message="Title should not be null and It accepts String")
+	@Pattern (regexp=  "[a-z A-Z]*$" )
     private String testTitle;
 	@NotEmpty(message="Test Duration should not be null and It accepts String")
+	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]")
     private String testDuration;
 	@NotEmpty(message="Test Question1 should not be null and It accepts String")
 	private String testQuestion1;
@@ -30,8 +35,10 @@ public class TestBean {
     private double testTotalMarks ;
 	private double testMarksScored ;
 	@NotEmpty(message="Start Time should not be null and It accepts String")
+	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]")
 	private String startTime ;
 	@NotEmpty(message="End time should not be null and It accepts String")
+	@Pattern(regexp="([01]?[0-9]|2[0-3]):[0-5][0-9]")
     private String endTime ;
 	
 	public int getTestId() {
