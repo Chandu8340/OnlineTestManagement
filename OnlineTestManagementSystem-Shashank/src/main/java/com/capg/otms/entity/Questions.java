@@ -1,3 +1,4 @@
+
 package com.capg.otms.entity;
 import java.util.Arrays;
 import javax.persistence.Entity;
@@ -7,11 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Questions")
+@Table(name="Questions")//Creation of table
 
 public class Questions {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)//generating the Id in sequence
 	private int questionId;
 	private String questionTitle;
 	private String[] questionOption;

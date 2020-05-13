@@ -11,6 +11,7 @@ public interface IOtmsDao {
 	public int getResult(Questions question);
 	public Questions addQuestions(Questions question);
 	public List<Questions>getAllQuestions();
+	public Questions findById(int questionId);
 
 
 }
