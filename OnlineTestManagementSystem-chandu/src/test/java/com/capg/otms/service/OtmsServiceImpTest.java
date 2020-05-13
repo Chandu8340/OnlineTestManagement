@@ -31,11 +31,12 @@ class OtmsServiceImpTest {
 	void testAddUser() {
 
 		UserBean user = new UserBean();
-		user.setFirstName("chandu");
-		user.setLastName("reddy");
+		user.setUserId(101);
+		user.setUserName("chandu");
 		user.setEmail("212chandu@gmail.com");
 		user.setPassword("demo123");
-		user.setPhonenumber(8885182933l);
+		user.setPhonenumber(8125241259l);
+		
 
 		Mockito.when(dao.addUser(user)).thenReturn(user);
 		assertThat(service.addUser(user)).isEqualTo(user);
@@ -47,11 +48,11 @@ class OtmsServiceImpTest {
 
 		UserBean user = new UserBean();
 		user.setUserId(101);
-		user.setFirstName("chandu");
-		user.setLastName("reddy");
-		user.setEmail("212chandu@gmail.com");
-		user.setPassword("demo123");
-		user.setPhonenumber(8885182933l);
+		user.setUserName("rajesh");
+		user.setEmail("raju@gmail.com");
+		user.setPassword("demo");
+		user.setPhonenumber(8125241259l);
+		
 
 		Mockito.when(dao.updateUser(user)).thenReturn(user);
 		assertThat(service.updateUser(user)).isEqualTo(user);
@@ -59,7 +60,7 @@ class OtmsServiceImpTest {
 	}
 	@Test
 	public void testdeleteUser(){
-		UserBean userBean=new UserBean(101,"chandu","reddy","212chandu@gmail.com","demo123",8888999977l);
+		UserBean userBean=new UserBean(101,"chandu","212chandu@gmail.com","chandu123",8125241259l);
 		
 		service.deleteUser(101);
 		verify(dao,times(1)).deleteUser(101);

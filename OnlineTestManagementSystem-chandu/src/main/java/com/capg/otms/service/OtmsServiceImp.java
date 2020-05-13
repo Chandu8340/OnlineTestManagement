@@ -43,10 +43,8 @@ public class OtmsServiceImp implements IOtmsService {
 	@Override
 	public void deleteUser(long userId) {
 
-		
-			dao.deleteUser(userId);
-		}
-	
+		dao.deleteUser(userId);
+	}
 
 	@Override
 	public List<UserBean> getAllUser() {
