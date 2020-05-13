@@ -1,0 +1,10 @@
+ONLINE TEST MANAGEMENT SYSTEM
+Postman:
+to add:method:Post
+http://localhost:5555/Test/add
+to update:method:put
+http://localhost:5555/Test/update
+to List:method:Get
+http://localhost:5555/Test/getAll
+to fondById:method:Get
+http://localhost:5555/Test/getdetails/id
