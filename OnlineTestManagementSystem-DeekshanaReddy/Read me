@@ -1,0 +1,6 @@
+In Postman
+for add method-http://localhost:8090/test/create
+for delete method-http://localhost:8090/test/removeById/{testId}
+for get all tests-http://localhost:8090/test/findall
+
+for swagger-http://localhost:8082/swagger-ui.html
